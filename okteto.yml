@@ -1,0 +1,17 @@
+name: backup-client
+autocreate: true
+image: flou21/golang:mongo-tools
+command: zsh
+securityContext:
+  capabilities:
+    add:
+    - SYS_PTRACE
+volumes:
+- /go/pkg/
+- /root/.cache/go-build/
+environment:
+  - API_HOST=http://backup-api:3000
+  - BACKUP_BASE_PATH=/usr/src/app/dummy-backups
+sync:
+- .:/usr/src/app
+workdir: /usr/src/app
