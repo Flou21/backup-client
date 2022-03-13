@@ -20,6 +20,8 @@ RUN wget https://fastdl.mongodb.org/tools/db/mongodb-database-tools-ubuntu2004-x
 
 RUN dpkg -i mongodb-database-tools-ubuntu2004-x86_64-100.5.2.deb
 
-COPY --from=builder /app/client /usr/local/bin/client
+WORKDIR /app
 
-CMD client
+COPY --from=builder /app/client /client
+
+CMD /app/client
