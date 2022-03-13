@@ -1,4 +1,4 @@
-FROM golang:1.16.6-alpine3.14 as builder
+FROM flou21/golang:mongo-tools
 
 WORKDIR /app
 
@@ -10,9 +10,4 @@ COPY . .
 
 RUN go build .
 
-
-FROM alpine:3.14
-
-COPY --from=builder /app/client /usr/local/bin/client
-
-CMD client
+CMD /app/client
