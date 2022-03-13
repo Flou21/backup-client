@@ -10,7 +10,8 @@ volumes:
 - /go/pkg/
 - /root/.cache/go-build/
 environment:
-  - API_HOST=http://backup-api:3000
+  #- API_HOST=https://backups.flou.dev/api
+  - API_HOST=http://backup-api:3000/api
   - BACKUP_BASE_PATH=/usr/src/app/dummy-backups
 sync:
 - .:/usr/src/app
