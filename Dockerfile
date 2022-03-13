@@ -1,4 +1,4 @@
-FROM flou21/golang:mongo-tools
+FROM golang:1.16.6-alpine3.14 as builder
 
 WORKDIR /app
 
@@ -10,4 +10,16 @@ COPY . .
 
 RUN go build .
 
-CMD /app/client
+
+FROM debian
+
+
+RUN apt update && apt install wget -y
+
+RUN wget https://fastdl.mongodb.org/tools/db/mongodb-database-tools-ubuntu2004-x86_64-100.5.2.deb
+
+RUN dpkg -i mongodb-database-tools-ubuntu2004-x86_64-100.5.2.deb
+
+COPY --from=builder /app/client /usr/local/bin/client
+
+CMD client
